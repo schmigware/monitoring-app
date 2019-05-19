@@ -1,6 +1,0 @@
-Get service URL:
-
-minikube service validation --url -n testbed
-
-currently yields:
-http://192.168.99.117:32019/graphql
