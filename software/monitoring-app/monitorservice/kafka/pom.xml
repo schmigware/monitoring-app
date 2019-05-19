@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+    	<groupId>org.cit.mcaleerj.thesis.monitoring</groupId>
+		<artifactId>monitoring-service-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+	<artifactId>kafka-monitoring-task</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<description>Kafka monitoring task implementation</description>
+	<name>sync</name>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.cit.mcaleerj.thesis.monitoring</groupId>
+			<artifactId>monitoring-service-job</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.cit.mcaleerj.thesis.monitoring</groupId>
+			<artifactId>monitoring-service-dto</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.cit.mcaleerj.thesis.monitoring</groupId>
+			<artifactId>monitoring-service-dao</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-clients</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.cit.mcaleerj.thesis.management</groupId>
+			<artifactId>management-service-client</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
+
+</project>

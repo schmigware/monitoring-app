@@ -1,0 +1,16 @@
+
+    mutation {
+        updateTopology(topology: %s) {
+            uuid
+            environmentUuid
+            environmentName
+            nodes {
+              name
+            }
+            edges {
+              label
+              source
+              target
+            }
+        }
+    }

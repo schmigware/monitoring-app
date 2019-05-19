@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sink
+  namespace: testbed
+spec:
+  selector:
+      matchLabels:
+        app: sink
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sink
+    spec:
+      containers:
+        - name: sink
+          image: cit.thesis/sink-service-application:0.0.1-SNAPSHOT
+          imagePullPolicy: Never
+          env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: sink

@@ -1,0 +1,23 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: ingestion-service
+  namespace: testbed
+data:
+  mon.agent.nodename: ingestion-service
+  mon.agent.incoming-edges: source
+  mon.agent.outgoing-edges: ingest
+  application.yml: |-
+    spring:
+      cloud:
+        stream:
+          kafka:
+            binder:
+              brokers: broker.kafka:9092
+          bindings:
+            input-stream:
+              destination: source
+              contentType: application/json
+            output-stream:
+              destination: ingest
+              contentType: application/json

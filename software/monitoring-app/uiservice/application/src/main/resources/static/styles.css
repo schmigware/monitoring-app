@@ -1,0 +1,113 @@
+body {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
+}
+
+
+@-webkit-keyframes flash {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+
+  25%, 75% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes flash {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+
+  25%, 75% {
+    opacity: 0.2;
+  }
+}
+
+.warn {
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+}
+
+.live.map {
+  width: 100%;
+  height: 100%;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+rect {
+  fill: #fff;
+}
+
+.node rect {
+  stroke-width: 1.5px;
+  stroke: #333;
+  fill: none;
+}
+
+.edge rect {
+  fill: #fff;
+}
+
+.live.map .edgePath path {
+  stroke: #999;
+  stroke-width: 1.5px;
+  fill: #999;
+}
+
+.live.map circle {
+  fill: green;
+}
+
+.live.map polygon {
+  fill: red;
+}
+
+.live.map rect {
+  fill: lightblue;
+}
+
+.edgeActivity {
+  text-align: center;
+  font-size: 80%;
+  color: #2b5fe2;
+  font-style: italic;
+}
+
+#header {
+    background: black;
+    color: white;
+    position: relative;
+    height: 50px;
+    padding: 5px 20px 5px 20px;
+}
+
+#topologyNameDiv {
+    float: left;
+    height: 100%;
+    font-size: 2em;
+    line-height: 50px;
+}
+
+#snapshotTimeDiv {
+    float: right;
+    height: 100%;
+    line-height: 50px;
+}
+
+

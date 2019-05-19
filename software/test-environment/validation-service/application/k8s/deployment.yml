@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: validation
+  namespace: testbed
+spec:
+  selector:
+      matchLabels:
+        app: validation
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: validation
+    spec:
+      containers:
+        - name: validation
+          image: cit.thesis/validation-service-application:0.0.1-SNAPSHOT
+          imagePullPolicy: Never
+          env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: validation

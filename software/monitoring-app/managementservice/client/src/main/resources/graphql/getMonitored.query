@@ -1,0 +1,11 @@
+{
+  monitored {
+  	name
+  	uuid
+  	profileId
+  	configurationProperties {
+		name
+    	value
+  	}
+  }
+}

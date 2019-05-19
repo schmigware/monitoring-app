@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.cit.mcaleerj.thesis.correlation</groupId>
+		<artifactId>correlation-service-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>correlation-service-dto</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<description>Correlation service dto module</description>
+	<name>dto</name>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>io.leangen.graphql</groupId>
+			<artifactId>spqr</artifactId>
+			<version>${spqr.version}</version>
+		</dependency>
+
+	</dependencies>
+
+</project>

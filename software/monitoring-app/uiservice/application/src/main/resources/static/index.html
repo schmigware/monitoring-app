@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Realtime Pipeline Viewer</title>
+
+    <link rel="stylesheet" href="styles.css"/>
+
+    <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <script src="https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="graph.js"></script>
+
+
+    <script lang="javascript">
+
+        var lastTopologyHash;
+        var graph;
+
+        function initialiseTopologyListener(environmentUUID) {
+            var socketEndpoint = 'ws://' + window.location.host + '/subscription/topology/' + environmentUUID;
+            var socket = new WebSocket(socketEndpoint);
+            socket.onopen = function (event) {
+                console.log("Topology listener initialised");
+            };
+
+            socket.onerror = function (event) {
+                console.log("Topology listener initialisation failed");
+            };
+
+            socket.onmessage = function (message) {
+                var topologyJSON = message.data;
+                console.log("topology: " + topologyJSON);
+                var topologyHash = topologyJSON.hashCode();
+                if(topologyHash === lastTopologyHash) {
+                    console.log("Rendered topology is up to date");
+                    return;
+                }
+
+                lastTopologyHash = topologyHash;
+                var topology = JSON.parse(topologyJSON);
+                var envName = topology.environmentName;
+                var envNameDiv = document.getElementById("topologyNameDiv");
+                envNameDiv.innerHTML = envName;
+
+
+                console.log("render graph: " + JSON.stringify(graph));
+                graph = renderGraph(toGraph(topology));
+            };
+        }
+
+        function initialiseAggregationListener(environmentUUID) {
+            var socketEndpoint = 'ws://' + window.location.host + '/subscription/aggregation/' + environmentUUID;
+            var socket = new WebSocket(socketEndpoint);
+            socket.onopen = function () {
+                console.log("Aggregation listener initialised");
+            };
+            socket.onmessage = function (message) {
+                var aggregation = JSON.parse(message.data);
+                if(graph) {
+                    console.log("agg: "+ JSON.stringify(aggregation));
+                    renderAggregation(aggregation);
+                }
+
+            };
+        }
+
+        function initialiseListeners() {
+            var envUUID = document.URL.substr(document.URL.lastIndexOf('/') + 1);
+            initialiseTopologyListener(envUUID);
+            initialiseAggregationListener(envUUID);
+        }
+
+        function addStringHash() {
+            String.prototype.hashCode = function () {
+                var hash = 0, i, chr;
+                if (this.length === 0) {
+                    return hash;
+                }
+                for (i = 0; i < this.length; i++) {
+                    chr = this.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + chr;
+                    hash |= 0; // Convert to 32bit integer
+                }
+                return hash;
+            };
+        }
+
+        function initialise() {
+            addStringHash();
+            initialiseListeners();
+        }
+
+    </script>
+</head>
+<body onload="initialise()">
+<div id="header">
+    <div id="topologyNameDiv">
+
+    </div>
+    <div id="snapshotTimeDiv">
+
+    </div>
+</div>
+<div class="live map">
+    <svg>
+        <g/>
+    </svg>
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+### Java template
+*.class
+
+### IntelliJ project files
+.idea
+*.iml
+*.DS_Store
+*.lst
+out
+
+### Eclipse
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+
+### File-based project format:
+*.iws
+
+### mpeltonen/sbt-idea plugin
+.idea_modules/
+dependency-reduced-pom.xml
+
+### Maven
+log/
+target/
+
+### Package Files
+*.jar
+*.war
+*.ear
+*.ucls
+
+### TEX
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+*.fdb_latexmk
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.cit.mcaleerj.thesis.discovery</groupId>
+		<artifactId>discovery-service-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>k8s-discovery-agent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<description>Kubernetes Kafka Discovery Agent</description>
+	<name>k8s-discovery-agent</name>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.cit.mcaleerj.thesis.discovery</groupId>
+			<artifactId>discovery-agent-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.kubernetes</groupId>
+			<artifactId>client-java</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>1.21</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.cit.mcaleerj.thesis.management</groupId>
+			<artifactId>management-service-client</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
+
+</project>

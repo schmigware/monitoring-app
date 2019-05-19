@@ -1,0 +1,26 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: validation-service
+  namespace: testbed       
+data:  
+  mon.agent.nodename: validation-service
+  mon.agent.incoming-edges: ingest
+  mon.agent.outgoing-edges: validated, deadletter
+  application.yml: |-
+    spring:
+      cloud:
+        stream:
+          kafka:
+            binder:
+              brokers: broker.kafka:9092
+          bindings:
+            input-stream:
+              destination: ingest
+              contentType: application/json
+            validated-output-stream:
+              destination: validated
+              contentType: application/json
+            deadletter-output-stream:
+              destination: deadletter
+              contentType: application/json

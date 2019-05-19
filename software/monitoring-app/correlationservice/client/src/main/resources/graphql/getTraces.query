@@ -1,0 +1,11 @@
+{
+  getCorrelationTraces(filter: {
+    environmentUUID: "ENVIRONMENT_UUID"
+    field: "FIELD_NAME"}) {
+    messages {
+      edgeLabel
+      sourceNode
+      messageContent
+    }
+  }
+}

@@ -1,0 +1,2 @@
+org.cit.mcaleerj.thesis.discovery.agent.spi.DiscoveryAgentProvider=org.cit.mcaleerj.thesis.discovery.kafka.provider.MessageCorrelationDiscoveryAgentProvider
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.cit.mcaleerj.thesis.discovery.kafka.MessageCorrelationAgentConfiguration

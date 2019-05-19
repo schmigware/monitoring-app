@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingestion
+  namespace: testbed
+spec:
+  selector:
+      matchLabels:
+        app: ingestion
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ingestion
+    spec:
+      containers:
+        - name: ingestion
+          image: cit.thesis/ingestion-service-application:0.0.1-SNAPSHOT
+          imagePullPolicy: Never
+          env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: ingestion

@@ -1,0 +1,7 @@
+{
+	environmentProfiles(filter: {id: "PROFILEID" }) {
+  	    name
+  	    id
+        monitorTaskClass
+	}
+}

@@ -1,0 +1,49 @@
+discovery:
+  service:
+    discovery:
+      period: 10000
+    endpoints:
+      topology-update: /subscription/topology/*
+
+spring:
+  application:
+    name: discovery-service
+  profiles:
+    active: dev
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/thesis
+    driver-class-name: org.postgresql.Driver
+    username: thesis
+    password: thesis
+
+  jpa:
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: ${spring.datasource.schema-name}
+        temp:
+          use_jdbc_metadata_defaults: false
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9091/eureka/
+  instance:
+    preferIpAddress: true
+
+management:
+  service:
+    serviceId: management-service
+
+correlation:
+  service:
+    serviceId: correlation-service
+
+server:
+  port: 8085

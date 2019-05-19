@@ -1,0 +1,11 @@
+{
+  environments {
+  	name
+  	uuid
+ 	profileId
+  	configurationProperties {
+    	name
+    	value
+	  }
+	}
+}

@@ -1,0 +1,1 @@
+org.cit.mcaleerj.thesis.discovery.agent.spi.DiscoveryAgentProvider=org.cit.mcaleerj.thesis.discovery.k8s.provider.KubernetesAgentProviderImpl

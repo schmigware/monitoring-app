@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+    	<groupId>org.cit.mcaleerj.thesis.aggregation</groupId>
+		<artifactId>aggregation-service-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+	<artifactId>aggregation-service</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<description>Aggregation service component</description>
+	<name>service</name>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.cit.mcaleerj.thesis.management</groupId>
+			<artifactId>management-service-client</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.cit.mcaleerj.thesis.aggregation</groupId>
+			<artifactId>aggregation-service-dto</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.cit.mcaleerj.thesis.aggregation</groupId>
+			<artifactId>aggregation-service-job</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
+
+</project>

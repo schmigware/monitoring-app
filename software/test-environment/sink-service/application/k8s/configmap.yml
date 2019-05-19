@@ -1,0 +1,26 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: sink-service
+  namespace: testbed   
+data:
+  mon.agent.nodename: sink-service
+  mon.agent.incoming-edges: validated
+  mon.agent.outgoing-edges: processed, deadletter
+  application.yml: |-
+    spring:
+      cloud:
+        stream:
+          kafka:
+            binder:
+              brokers: broker.kafka:9092
+          bindings:
+            input-stream:
+              destination: validated
+              contentType: application/json
+            processed-output-stream:
+              destination: processed
+              contentType: application/json
+            deadletter-output-stream:
+              destination: deadletter
+              contentType: application/json

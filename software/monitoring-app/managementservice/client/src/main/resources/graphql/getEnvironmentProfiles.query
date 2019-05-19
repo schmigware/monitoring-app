@@ -1,0 +1,10 @@
+{
+	environmentProfiles {
+  	    name
+  	    id
+  	    configurationProperties {
+            name
+            value
+        }
+	}
+}
