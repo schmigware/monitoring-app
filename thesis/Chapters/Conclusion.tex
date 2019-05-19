@@ -1,0 +1,62 @@
+\chapter{Conclusions and  Further Development}
+\lhead{\emph{Conclusions and  Further Development}}
+
+The research conducted, and software implemented, during the course of this dissertation demonstrate that real-time monitoring of message-driven pipelines is an achievable goal for developers, testers and maintainers of such environments. By rendering pipeline state in a readily consumable and accessible fashion, answers to questions such as the following are readily available:
+
+
+\begin{itemize}
+	\item What microservices currently comprise my pipeline application?
+		    \begin{itemize}
+		    	\item Scan the pipeline topology graph to yield the set of microservices.
+		    \end{itemize}
+	\item On what topics are my pipeline microservices communicating?
+	 	\begin{itemize}
+			\item Scan the pipeline topology graph to yield the set of edge labels.
+		\end{itemize}
+	\item What activity, if any, is occurring on my pipeline at this moment?
+	 	\begin{itemize}
+			\item Scan the pipeline topology graph for edge activity information.
+		\end{itemize}
+	\item Are any of my pipeline microservices currently down?
+		\begin{itemize}
+			\item Scan the pipeline topology graph for nodes with activity on incoming edges but no corresponding outgoing activity.
+		\end{itemize}
+	\item What bottlenecks exist in my pipeline at present?
+			\begin{itemize}
+				\item Scan the pipeline topology graph for nodes with activity on incoming edges but comparatively little outgoing activity.
+			\end{itemize}
+    \item Are messages successfully traversing the entire pipeline?
+    		\begin{itemize}
+    			\item Scan the pipeline topology graph for activity on edges connected to sink nodes.
+    		\end{itemize}
+    \item What are the source message topics for my pipeline?
+    		\begin{itemize}
+				\item Scan the pipeline topology graph for edges connected to source nodes.
+			\end{itemize}
+    \item What are the sink message topics for my pipeline?
+    	\begin{itemize}
+    		\item Scan the pipeline topology graph for edges connected to sink nodes.
+    	\end{itemize}
+\end{itemize}
+
+The implemented monitoring prototype establishes that the rendition of application state can dynamically reflect pipeline topology evolution over time. Furthermore, the core implementation successfully abstracts specific messaging technologies, and has been shown to function as designed as a monitoring tool for Kafka-based pipelines. Overall, all functional and non-functional requirements set out in section \ref{project_requirements} have been implemented successfully.
+
+The implemented solutions to the key challenges presented by this research and implementation - edge correlation, topology discovery, and topology visualisation will be evaluated on various criteria including reliability, applicability, scalability, and level of invasiveness. 
+
+Edge correlation has been implemented by developing a Spring library which, once added to the runtime class path of a Spring application, will automatically add message sender information to all produced Kafka messages. This solution is relatively non-invasive, requiring an update to the application class path only; it is also an absolute prerequisite for message-to-edge correlation. Once added to an application, the solution should be fully reliable and scalable. From an applicability perspective, this solution is very specific to Spring applications which use Kafka as a messaging technology. For applications which are not implemented with Java and Spring, alternative solutions must be developed. 
+
+Various approaches to topology discovery have been implemented. Manual topography configuration (section \ref{design_topology_discovery}) is reliable and applicable to various messaging technology types, but may require significant manual work as well as ongoing maintenance as pipeline state evolves. Furthermore, expertise in use of the monitoring application prototype is required in order to perform topology management. The Kubernetes Discovery Agent in contrast requires less expertise and less maintenance, providing parties responsible for application deployment annotate configmaps with the prescribed metadata; it too is agnostic of message technology has as such has broad applicability; with the proviso that the pipeline application is deployed to a Kubernetes cluster. This implementation serves to demonstrate that in general, pipeline metadata may be derived from the monitored pipeline's runtime environment, as is done by the Kiali monitoring solution. Finally, as has been shown in section \ref{design_message_correlation}, discovery based on message correlation, while non-invasive, is applicable only to pipeline applications with appropriate topology structures, and requires accurate message timestamp information which may not always be available in a distributed environment.
+
+While pipeline visualisation has been demonstrated successfully, the prototype implementation will exhibit shortcomings when applied to pipelines comprising large numbers of nodes. During early prototyping it was found that screen real estate became an issue when rendering manually constructed topologies comprising in excess of approximately twenty nodes to a 1080p display. Existing monitoring solutions such as Kiali and StreamSets would appear to suffer a similar shortcoming.
+
+Ultimately, it has been demonstrated that while real-time monitoring is practical for Kafka-based pipeline applications, some invasive change to the pipeline software, or tight integration with an instrumented deployment environment is an unavoidable prerequisite. It has been demonstrated that a technology-agnostic solution implementation is achievable. By comparison to for instance Kiali, which features comparable topology discovery and activity monitoring functionality), this solution places no strict dependency requirements, such as Istio integration, on pipeline implementations.
+
+Several aspects of the research performed and software implemented during the course of this dissertation may merit further investigation. Foremost amongst these are opportunities to enhance the Aggregation Service with the goal of providing additional useful information to users. By exploiting historical aggregation information, functionality allowing users to inspect monitored environment during the past would be achievable. Furthermore, additional useful metrics might be calculated by the aggregation logic, such a minimum, maximum and average throughput per edge over time. Visualisation enhancements could include styling of edge graphics to communicate more readily which monitored microservices are responsible for bottlenecking. 
+
+The author has considered the implementation of additional services such as a \textit{Decorator Service}, which would define a plug-in interface allowing for custom decoration of graph nodes at the Dashboard Client. This would allow the client application to render information such a service liveness, links to service logs and JMX statistics. While exploration of such functionality was not scoped for this dissertation, such enhancements would add considerable value to the solution, while also introducing the possibility of interactive dashboards.
+
+The basic Correlation Service prototype might be enhanced to support visual correlation traces based on more flexible correlation criteria. For example, a Dashboard Client user might requests a correlation trace for message containing the payload property / value pair \textit{"foo": "bar"}. The correlation engine, enhanced to support configurable and extensible correlation rules, would provide trace information to the Dashboard which would in turn visually render the trace for user analysis.
+
+Ideally, monitoring and topology discovery plugins could be developed in the course of any future work, allowing for monitoring of disparate pipeline applications based on various messaging technologies. 
+
+Finally, tractability limitations around the rendering of pipelines containing large numbers of services might be explored in any future development of this research area.

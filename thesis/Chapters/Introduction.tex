@@ -1,0 +1,70 @@
+\chapter{Introduction}
+\lhead{\emph{Introduction}}
+
+\section{Motivation}\label{intro_motivation}
+The author's professional industrial experience as a designer and developer of message-driven data pipeline software has lead to some frustration at the scarcity of pipeline monitoring tooling, specifically in the areas of real-time pipeline topology discovery and message activity reporting. Major cloud providers currently provide no such monitoring functionality off the shelf, while those third party solutions that do exist often require  lock-in to a full life-cycle ecosystem, invasive instrumentation, or integration of pipeline software with complex frameworks. The author has undertaken this research in order to explore the potential for a lightweight, non-invasive and technology-agnostic solution that allows parties involved with the development of data pipelines to achieve the following fundamental use case:
+
+\textit {As a developer, I want to understand the composition and activity state of my deployed pipeline applications at a glance}.
+
+Wall-mounted displays used to render for example automated test results across product versions and test development environments are not uncommon in contemporary development labs. It is the author's intent that such informational dashboards will be used to convey real-time pipeline information in a format that enables developers and testers to reach conclusion about application state at a glance. Developers may ask questions such as:
+
+\begin{enumerate}
+	\item What microservices comprise the currently deployed pipelines?
+	\item Which microservices are currently consumers of given a message channel or topic?
+	\item Is there any message activity currently occurring in any part of a given pipeline?
+	\item Where are the performance bottlenecks in the currently deployed pipelines?
+\end{enumerate}
+
+The first question listed here may give cause for surprise. However as asserted in \cite{woods2016}, given a message-driven MSA-based application comprises a number of collaborating network-accessible processes, the structure of a given pipeline might not be well understood before runtime. 
+
+While answers to the above queries are achievable, the process of arriving at same may be time-consuming while also requiring specific skill sets. The following examples demonstrate possible means of arriving at respective conclusions to the given questions:
+
+\begin{enumerate}
+	\item If the pipeline is deployed to a cluster manager such a Kubernetes, use client command-line tooling to enumerate the currently deployed set of microservices.
+	\item Inspection of software documentation (if up-to-date) may yield an answer, though product source code is a more reliable source of truth.
+	\item Manually configure listener processes for every message channel defined by the pipeline; check all processes for evidence of message production.
+	\item Manually sample message activity on all message channels, then calculate and compare throughput on all channels.
+\end{enumerate}
+
+This dissertation will explore the development of a monitoring solution which enables technical staff to answer the above questions - at once - in seconds, rather than minutes or hours.	
+
+\subsection{Research Objectives} \label{intro_objectives}
+
+The following objectives have been identified as part of this research:
+
+\begin{enumerate}
+	\item Development of a messaging-technology agnostic, plug-in based software solution for the real-time monitoring of message-driven pipeline application state.
+	\item Development of Apache Kafka specific plug-ins for the aforementioned monitoring solution.
+	\item Development of an Apache Kafka-based test bed pipeline and supporting tooling. 
+	\item Successful demonstration of real-time monitoring against the test bed pipeline.
+	
+\end{enumerate}
+
+\section{Executive Summary} \label{exec_summary}
+
+In order to achieve the objectives stated in section \ref{intro_objectives}, a pipeline monitoring solution and accompanying test bed pipeline will be developed.
+
+The central effort of this research will be the design and implementation of a messaging-technology agnostic  monitoring solution. The monitoring solution will enable:
+
+\begin{itemize}
+	\item Real-time discovery and rendering of pipeline structure, i.e. the services comprising a pipeline and relationships between same.
+	\item Real-time rendering of message activity in monitored pipelines.
+	\item Parallel monitoring and rendition of multiple pipelines. 
+	\item User-friendly configuration of monitored pipeline details.
+	
+\end{itemize}
+
+In keeping with the technology-agnostic natures of the solution, the monitoring prototype will be \textit{agent} and \textit{plug-in} based\cite{Maamar:2000:OSA:351936.351955}. Where possible, the solution will be non-invasive, requiring no custom configuration of those hosts or virtual machines running monitored services.
+
+The test bed pipeline will comprise a Kubernetes cluster (a popular open-source container orchestration system), running Apache Kafka (a distributed stream processing platform) and Zookeeper (a centralised key/value store required by Zookeeper),  running a sample data pipeline comprising three Spring Boot microservices.
+
+Finally, the test bed will be leveraged in order to demonstrate the feasibility of performing real-time monitoring on an Apache Kafka-based pipeline.
+
+\section{Contribution}
+The key contribution of this research will be potential savings in time - and implicitly cost - to organisations involved with development of message-driven data pipelines. As detailed in section \ref{intro_motivation}, the answers to simple queries around pipeline composition and activity state currently require not only time investment, but considerable expertise in various technologies. As a further contribution, this work will render hitherto obscure application composition and state information available to non-technical parties.
+
+\section{Structure of This Document}
+The opening chapter of this thesis contains introductory motivational statements, an executive summary of planned research and a brief enumeration of the contributions this undertaking endeavours to achieve. Chapter 2 will explore the characteristics and challenges inherent to message-driven application development, examine current industry practices around runtime monitoring of such software, and review recent academic literature relating to same. Chapter 3 will detail the requirements and design for a functional pipeline monitoring solution, with attention to the challenges and potential solutions that are inherent. A deep-dive into the specifics of the implemented solution is the focus of Chapter 4. A brief walkthrough of the solution is covered in Chapter 5, while the final chapter states research conclusions and lists of number of suggestions for future work. The appendices contain step-by-step guides for downloading, building and running both the monitoring software and a supporting test bed. 
+
+All software artefacts - including the sources used to compile this document - are available at https://github.com/schmigware/monitoring-app.
+
