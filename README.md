@@ -9,7 +9,7 @@ Thesis submission artefacts including:
   - Walthough video.
   
   
-#Walkthrough script used in video. In unclear on anything, consult thesis appendices.
+# Walkthrough script used in video. In unclear on anything, consult thesis appendices.
  
 Welcome to demo. Recorded after thesis presentation 21/05/2019.
 
